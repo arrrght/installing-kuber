@@ -14,12 +14,13 @@ cp /home/user/.ssh /root/
 2. Edit inventories/office/hosts
 
 ```
-cd roles/initial/files
+pushd roles/initial/files
 get_tools.sh
 
 cd certs
 00-gen-all.sh
 
-cd -
+popd
+
 ansible-playbook all.yml -i inventories/office
 ```
