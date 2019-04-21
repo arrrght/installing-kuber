@@ -1,5 +1,4 @@
 ---
-
 - name: Setting hostname
   hostname:
     name: "{{ hostname_name }}"
@@ -20,3 +19,30 @@
     - files/cfssl
     - files/cfssljson
     - files/kubectl
+
+- name: Distribute Certificates to workers
+  copy:
+    src: "{{ item }}"
+    dest: /root/
+    owner: root
+    mode: 0644
+  with_fileglob:
+    - files/certs/ca.pem
+    - "files/certs/{{ hostname_name }}-key.pem"
+    - "files/certs/{{ hostname_name }}.pem"
+  when: "'workers' in group_names"
+
+- name: Distribute Certificates to controllers
+  copy:
+    src: "{{ item }}"
+    dest: /root/
+    owner: root
+    mode: 0644
+  with_fileglob:
+    - files/certs/ca.pem
+    - files/certs/ca-key.pem
+    - files/certs/kubernetes.pem
+    - files/certs/kubernetes-key.pem
+    - files/certs/service-account.pem
+    - files/certs/service-account-key.pem
+  when: "'controllers' in group_names"
