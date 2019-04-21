@@ -30,6 +30,8 @@
     - files/certs/ca.pem
     - "files/certs/{{ hostname_name }}-key.pem"
     - "files/certs/{{ hostname_name }}.pem"
+    - "files/configs/{{ hostname_name }}.kubeconfig"
+    - files/configs/kube-proxy.kubeconfig
   when: "'workers' in group_names"
 
 - name: Distribute Certificates to controllers
@@ -45,4 +47,7 @@
     - files/certs/kubernetes-key.pem
     - files/certs/service-account.pem
     - files/certs/service-account-key.pem
+    - files/configs/admin.kubeconfig
+    - files/configs/kube-controller-manager.kubeconfig
+    - files/configs/kube-scheduler.kubeconfig
   when: "'controllers' in group_names"

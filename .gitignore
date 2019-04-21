@@ -6,3 +6,4 @@ roles/initial/files/certs/*.json
 roles/initial/files/cfssljson
 roles/initial/files/cfssl
 roles/initial/files/kubectl
+roles/initial/files/configs/*.kubeconfig
