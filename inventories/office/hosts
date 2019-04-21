@@ -1,0 +1,17 @@
+#tmplt ansible_host=10.200.16.230 ansible_user=root become=root
+c1    ansible_host=10.200.16.231 ansible_user=root become=true
+c2    ansible_host=10.200.16.232 ansible_user=root become=true
+c3    ansible_host=10.200.16.233 ansible_user=root become=true
+w1    ansible_host=10.200.16.236 ansible_user=root become=true
+w2    ansible_host=10.200.16.237 ansible_user=root become=true
+w3    ansible_host=10.200.16.238 ansible_user=root become=true
+
+[controllers]
+c1
+c2
+c3
+
+[worker]
+w1
+w2
+w3

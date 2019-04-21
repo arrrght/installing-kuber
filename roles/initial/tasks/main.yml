@@ -1,0 +1,22 @@
+---
+
+- name: Setting hostname
+  hostname:
+    name: "{{ hostname_name }}"
+  when: hostname_name is defined
+
+- name: Copy etc/hosts
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+
+- name: Copy tools
+  copy:
+    src: "{{ item }}"
+    dest: /usr/local/bin/
+    owner: root
+    mode: 0755
+  with_fileglob:
+    - files/cfssl
+    - files/cfssljson
+    - files/kubectl

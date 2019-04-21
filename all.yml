@@ -1,0 +1,6 @@
+---
+- name: Common role for all server
+  become: true
+  hosts: all
+  roles:
+    - initial
