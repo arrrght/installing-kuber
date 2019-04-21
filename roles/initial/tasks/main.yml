@@ -50,4 +50,5 @@
     - files/configs/admin.kubeconfig
     - files/configs/kube-controller-manager.kubeconfig
     - files/configs/kube-scheduler.kubeconfig
+    - files/configs/encryption-config.yaml
   when: "'controllers' in group_names"

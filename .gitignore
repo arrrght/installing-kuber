@@ -7,3 +7,4 @@ roles/initial/files/cfssljson
 roles/initial/files/cfssl
 roles/initial/files/kubectl
 roles/initial/files/configs/*.kubeconfig
+roles/initial/files/configs/encryption-config.yaml
