@@ -1,4 +1,4 @@
-all.retry
+*.retry
 *.swp
 *.pem
 *.csr
@@ -8,3 +8,6 @@ roles/initial/files/cfssl
 roles/initial/files/kubectl
 roles/initial/files/configs/*.kubeconfig
 roles/initial/files/configs/encryption-config.yaml
+roles/etcd/files/etcd
+roles/etcd/files/etcdctl
+roles/etcd/files/etcd.tgz

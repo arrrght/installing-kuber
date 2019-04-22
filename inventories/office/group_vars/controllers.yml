@@ -1,0 +1,4 @@
+etcd_cluster_hosts:
+  - { name: c1, ip: 10.200.16.231 }
+  - { name: c2, ip: 10.200.16.232 }
+  - { name: c3, ip: 10.200.16.233 }

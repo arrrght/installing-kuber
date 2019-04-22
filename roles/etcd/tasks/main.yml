@@ -1,0 +1,41 @@
+---
+- name: Copy etcd
+  copy:
+    src: "{{ item }}"
+    dest: /usr/local/bin/
+    owner: root
+    mode: 0755
+  with_fileglob:
+    - files/etcd
+    - files/etcdctl
+
+- name: Make dirs
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - /etc/etcd
+    - /var/lib/etcd
+
+- name: Copy certificates
+  copy:
+    src: "{{ item }}"
+    dest: /etc/etcd/
+    owner: root
+    mode: 0755
+  with_fileglob:
+    - files/certs/ca.pem
+    - files/certs/kubernetes.pem
+    - files/certs/kubernetes-key.pem
+
+- name: make etcd.service
+  template:
+    src: etcd.service.j2
+    dest: /etc/systemd/system/etcd.service
+    owner: root
+    group: root
+  notify: 
+    - systemd-reload

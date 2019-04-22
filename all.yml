@@ -4,3 +4,9 @@
   hosts: all
   roles:
     - initial
+
+- name: Install etcd
+  become: true
+  hosts: controllers
+  roles:
+    - etcd

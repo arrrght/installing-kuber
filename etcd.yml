@@ -1,0 +1,6 @@
+---
+- name: Install etcd
+  become: true
+  hosts: controllers
+  roles:
+    - etcd
