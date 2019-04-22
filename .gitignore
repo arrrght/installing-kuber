@@ -11,3 +11,6 @@ roles/initial/files/configs/encryption-config.yaml
 roles/etcd/files/etcd
 roles/etcd/files/etcdctl
 roles/etcd/files/etcd.tgz
+roles/initial/files/kube-apiserver
+roles/initial/files/kube-controller-manager
+roles/initial/files/kube-scheduler

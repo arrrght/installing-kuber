@@ -10,3 +10,9 @@
   hosts: controllers
   roles:
     - etcd
+
+- name: Kuber-config
+  become: true
+  hosts: controllers
+  roles:
+    - kuber-config

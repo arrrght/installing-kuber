@@ -1,5 +1,5 @@
 #!/bin/sh
-ENCRYPTION_KEY=$(echo "such kubernates, very wow, so secure" | base64)
+ENCRYPTION_KEY=$(echo "such kuber, very wow, so secure" | base64)
 
 cat > encryption-config.yaml <<EOF
 kind: EncryptionConfig
