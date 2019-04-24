@@ -11,12 +11,16 @@ curl -o tools/kube-apiserver https://storage.googleapis.com/kubernetes-release/r
 curl -o tools/kube-controller-manager https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VER}/bin/linux/amd64/kube-controller-manager
 curl -o tools/kube-scheduler https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VER}/bin/linux/amd64/kube-scheduler
 curl -o tools/kube-proxy https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VER}/bin/linux/amd64/kube-proxy
+curl -o tools/kubelet https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VER}/bin/linux/amd64/kubelet
 
 curl -Lo crictl.tgz https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.14.0/crictl-v1.14.0-linux-amd64.tar.gz
 tar -xf crictl.tgz -C tools
 
 curl -o tools/runsc https://storage.googleapis.com/gvisor/releases/nightly/latest/runsc
-curl -Lo tools/runc https://github.com/opencontainers/runc/releases/download/v1.0.0-rc7/runc.amd64
+
+# little buggy
+#curl -Lo tools/runc https://github.com/opencontainers/runc/releases/download/v1.0.0-rc7/runc.amd64
+curl -Lo tools/runc https://github.com/opencontainers/runc/releases/download/v1.0.0-rc6/runc.amd64
 
 curl -Lo cni-plugins-amd64.tgz https://github.com/containernetworking/plugins/releases/download/v0.7.5/cni-plugins-amd64-v0.7.5.tgz
 tar -xf cni-plugins-amd64.tgz -C tools

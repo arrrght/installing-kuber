@@ -1,0 +1,50 @@
+---
+- name: Make dirs
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - /var/lib/kubernetes
+    - /etc/kubernetes
+    - /etc/kubernetes/config
+
+- name: Copy tools
+  copy:
+    src: "{{ item }}"
+    dest: /usr/local/bin/
+    owner: root
+    mode: 0755
+  with_fileglob:
+    - files/tools/kube-apiserver
+    - files/tools/kube-controller-manager
+    - files/tools/kube-scheduler
+    - files/tools/kubectl
+
+- name: Copy config files to /etc/kubernetes
+  copy:
+    src: "{{ item }}"
+    dest: /etc/kubernetes/config
+    owner: root
+    mode: 0644
+  with_fileglob:
+    - files/configs/kube-scheduler.yaml
+
+- name: Copy config files to /var/lib/kubernetes
+  copy:
+    src: "{{ item }}"
+    dest: /var/lib/kubernetes
+    owner: root
+    mode: 0644
+  with_fileglob:
+    - files/certs/ca.pem
+    - files/certs/ca-key.pem
+    - files/certs/kubernetes.pem
+    - files/certs/kubernetes-key.pem
+    - files/certs/service-account.pem
+    - files/certs/service-account-key.pem
+    - files/configs/encryption-config.yaml
+    - files/configs/kube-controller-manager.kubeconfig
+    - files/configs/kube-scheduler.kubeconfig

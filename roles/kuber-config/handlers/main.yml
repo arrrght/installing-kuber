@@ -19,3 +19,24 @@
     daemon_reload: true
     name: kube-scheduler
     state: restarted
+
+- name: containerd-reload
+  systemd:
+    enabled: true
+    daemon_reload: true
+    name: containerd
+    state: restarted
+
+- name: kubelet-reload
+  systemd:
+    enabled: true
+    daemon_reload: true
+    name: kubelet
+    state: restarted
+
+- name: kube-proxy-reload
+  systemd:
+    enabled: true
+    daemon_reload: true
+    name: kube-proxy
+    state: restarted

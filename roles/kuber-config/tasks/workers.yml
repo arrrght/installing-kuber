@@ -1,0 +1,41 @@
+---
+- name: containerd service
+  template:
+    src: containerd.service.j2
+    dest: /etc/systemd/system/containerd.service
+    owner: root
+    group: root
+  notify:
+    - containerd-reload
+
+- name: kubelet-config.yaml
+  template:
+    src: kubelet-config.yaml.j2
+    dest: /var/lib/kubelet/kubelet-config.yaml
+    owner: root
+    group: root
+
+- name: kubelet service
+  template:
+    src: kubelet.service.j2
+    dest: /etc/systemd/system/kubelet.service
+    owner: root
+    group: root
+  notify:
+    - kubelet-reload
+
+- name: kube-proxy-config.yaml
+  template:
+    src: kube-proxy-config.yaml.j2
+    dest: /var/lib/kube-proxy/kube-proxy-config.yaml
+    owner: root
+    group: root
+
+- name: kube-proxy service
+  template:
+    src: kube-proxy.service.j2
+    dest: /etc/systemd/system/kube-proxy.service
+    owner: root
+    group: root
+  notify:
+    - kube-proxy-reload

@@ -13,6 +13,6 @@
 
 - name: Kuber-config
   become: true
-  hosts: controllers
+  hosts: all
   roles:
     - kuber-config

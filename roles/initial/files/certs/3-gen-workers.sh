@@ -1,14 +1,14 @@
 #!/bin/bash
 
 names=(w1 w2 w3)
-ips=(10.200.16.231 10.200.16.232 10.200.16.233)
+ips=(10.200.16.236 10.200.16.237 10.200.16.238)
 
 for item in ${!names[*]}; do
 	name=${names[$item]}
 	ip=${ips[$item]}
 	cat > ${name}-csr.json <<EOF
 {
-  "CN": "system:node:${instance}",
+  "CN": "system:node:${name}",
   "key": {
     "algo": "rsa",
     "size": 2048

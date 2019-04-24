@@ -4,10 +4,10 @@ for instance in w1 w2 w3; do
   kubectl config set-cluster such-kuber-very-wow \
     --certificate-authority=../certs/ca.pem \
     --embed-certs=true \
-    --server=https://10.200.16.236:6443 \
+    --server=https://10.200.16.231:6443 \
     --kubeconfig=${instance}.kubeconfig
 
-  kubectl config set-credentials system:node:w1 \
+  kubectl config set-credentials system:node:${instance} \
     --client-certificate=../certs/${instance}.pem \
     --client-key=../certs/${instance}-key.pem \
     --embed-certs=true \

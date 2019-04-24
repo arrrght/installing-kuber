@@ -1,27 +1,7 @@
----
-- name: Make kube-apiserver.service
-  template:
-    src: kube-apiserver.service.j2
-    dest: /etc/systemd/system/kube-apiserver.service
-    owner: root
-    group: root
-  notify: 
-    - kube-apiserver-systemd-reload
+- name: Controllers tasks
+  include_tasks: controllers.yml
+  when: "'controllers' in group_names"
 
-- name: Make kube-controller-manager.service
-  template:
-    src: kube-controller-manager.service.j2
-    dest: /etc/systemd/system/kube-controller-manager.service
-    owner: root
-    group: root
-  notify: 
-    - kube-controller-manager-systemd-reload
-
-- name: Make kube-scheduler.service
-  template:
-    src: kube-scheduler.service.j2
-    dest: /etc/systemd/system/kube-scheduler.service
-    owner: root
-    group: root
-  notify: 
-    - kube-scheduler-reload
+- name: Workers tasks
+  include_tasks: workers.yml
+  when: "'workers' in group_names"
