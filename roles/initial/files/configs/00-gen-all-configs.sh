@@ -6,3 +6,4 @@
 ./4-scheduler.sh
 ./5-admin.sh
 ./6-encrypt.sh
+./7-rbac.sh

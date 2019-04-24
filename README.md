@@ -40,3 +40,13 @@ popd
 ```
 ansible-playbook -i inventories/office all.yml
 ```
+
+7. Handy game
+
+```
+cd configs
+kubectl --kubeconfig admin.kubeconfig get componentstatuses
+kubectl --kubeconfig admin.kubeconfig apply -f rbac-role.yaml
+kubectl --kubeconfig admin.kubeconfig apply -f rbac-role-bind.yaml
+
+```
