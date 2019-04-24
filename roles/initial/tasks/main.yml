@@ -1,4 +1,20 @@
 ---
+- name: Install supp packages
+  apt:
+    name:
+      - socat
+      - conntrack
+      - ipset
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  when: "'workers' in group_names"
+
+- name: Copy etc/hosts
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+
 - name: Setting hostname
   hostname:
     name: "{{ hostname_name }}"
@@ -17,22 +33,18 @@
     - /etc/kubernetes/config
   when: "'controllers' in group_names"
 
-- name: Copy etc/hosts
-  template:
-    src: hosts.j2
-    dest: /etc/hosts
 
-- name: Copy tools
+- name: Copy tools for controllers
   copy:
     src: "{{ item }}"
     dest: /usr/local/bin/
     owner: root
     mode: 0755
   with_fileglob:
-    - files/kube-apiserver
-    - files/kube-controller-manager
-    - files/kube-scheduler
-    - files/kubectl
+    - files/tools/kube-apiserver
+    - files/tools/kube-controller-manager
+    - files/tools/kube-scheduler
+    - files/tools/kubectl
   when: "'controllers' in group_names"
 
 - name: Distribute certificates to workers
@@ -76,3 +88,63 @@
     - files/configs/kube-controller-manager.kubeconfig
     - files/configs/kube-scheduler.kubeconfig
   when: "'controllers' in group_names"
+
+- name: Make dirs for workers
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - /opt/cni
+    - /etc/cni/net.d
+    - /opt/cni/bin
+    - /var/lib/kubelet
+    - /var/lib/kube-proxy
+    - /var/lib/kubernetes
+    - /var/run/kubernetes
+  when: "'workers' in group_names"
+
+- name: Copy tools for controllers
+  copy:
+    src: "{{ item }}"
+    dest: /usr/local/bin/
+    owner: root
+    mode: 0755
+  with_fileglob:
+    - files/tools/kubectl
+    - files/tools/kube-proxy
+    - files/tools/kubelet
+    - files/tools/runc
+    - files/tools/runsc
+    - files/tools/crictl
+    - files/tools/bin/containerd
+    - files/tools/bin/containerd-shim
+    - files/tools/bin/containerd-shim-runc-v1
+    - files/tools/bin/containerd-stress
+    - files/tools/bin/ctr
+  when: "'workers' in group_names"
+
+- name: Copy tools for controllers
+  copy:
+    src: "{{ item }}"
+    dest: /opt/cni/bin
+    owner: root
+    mode: 0755
+  with_fileglob:
+    - files/tools/crictl
+    - files/tools/bridge
+    - files/tools/dhcp
+    - files/tools/flannel
+    - files/tools/host-device
+    - files/tools/host-local
+    - files/tools/ipvlan
+    - files/tools/loopback
+    - files/tools/macvlan
+    - files/tools/portmap
+    - files/tools/ptp
+    - files/tools/sample
+    - files/tools/tuning
+    - files/tools/vlan
+  when: "'workers' in group_names"

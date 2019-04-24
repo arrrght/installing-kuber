@@ -1,12 +1,26 @@
 #!/bin/sh
 
 KUBE_VER="1.14.1"
-curl -o cfssl https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
-chmod +x cfssl
-curl -o cfssljson https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
-chmod +x cfssljson
+curl -o tools/cfssl https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
+chmod +x tools/cfssl
+curl -o tools/cfssljson https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
+chmod +x tools/cfssljson
 
-curl -o kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VER}/bin/linux/amd64/kubectl
-curl -o kube-apiserver https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VER}/bin/linux/amd64/kube-apiserver
-curl -o kube-controller-manager https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VER}/bin/linux/amd64/kube-controller-manager
-curl -o kube-scheduler https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VER}/bin/linux/amd64/kube-scheduler
+curl -o tools/kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VER}/bin/linux/amd64/kubectl
+curl -o tools/kube-apiserver https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VER}/bin/linux/amd64/kube-apiserver
+curl -o tools/kube-controller-manager https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VER}/bin/linux/amd64/kube-controller-manager
+curl -o tools/kube-scheduler https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VER}/bin/linux/amd64/kube-scheduler
+curl -o tools/kube-proxy https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VER}/bin/linux/amd64/kube-proxy
+
+curl -Lo crictl.tgz https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.14.0/crictl-v1.14.0-linux-amd64.tar.gz
+tar -xf crictl.tgz -C tools
+
+curl -o tools/runsc https://storage.googleapis.com/gvisor/releases/nightly/latest/runsc
+curl -Lo tools/runc https://github.com/opencontainers/runc/releases/download/v1.0.0-rc7/runc.amd64
+
+curl -Lo cni-plugins-amd64.tgz https://github.com/containernetworking/plugins/releases/download/v0.7.5/cni-plugins-amd64-v0.7.5.tgz
+tar -xf cni-plugins-amd64.tgz -C tools
+
+curl -Lo containerd.tgz https://github.com/containerd/containerd/releases/download/v1.2.6/containerd-1.2.6.linux-amd64.tar.gz
+tar -xf containerd.tgz -C tools
+

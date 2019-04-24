@@ -24,7 +24,13 @@ ansible -i inventories/office all -m ping
 ```
 pushd roles/initial/files
 ./get_tools.sh
+```
 
+6. Copy tools/{cfssl, cfssljson, kubectl} to your /usr/local/bin, chmod +x
+
+7. Generate certs and configs
+
+```
 cd certs
 ./00-gen-all-certs.sh
 cd ../configs
