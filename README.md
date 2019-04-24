@@ -11,16 +11,32 @@ cp /home/user/.ssh /root/
 ^D
 ```
 
-2. Edit inventories/office/hosts
+3. Edit inventories/office/hosts
+
+4. Check it
+
+```
+ansible -i inventories/office all -m ping
+```
+
+5. Get tool, generate certs
 
 ```
 pushd roles/initial/files
-get_tools.sh
+./get_tools.sh
 
 cd certs
-00-gen-all.sh
+./00-gen-all-certs.sh
+cd ../configs
+./00-gen-all-configs.sh
+cd ../../../etcd/files
+./00-get-etcd.sh
 
 popd
+```
 
-ansible-playbook all.yml -i inventories/office
+6. Play some
+
+```
+ansible-playbook -i inventories/office all.yml
 ```
