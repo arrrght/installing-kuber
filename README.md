@@ -22,11 +22,13 @@ ansible -i inventories/office all -m ping
 5. Get tool, generate certs
 
 ```
-pushd roles/initial/files
-./get_tools.sh
+pushd roles/etcd/files
+./00-get-etcd.sh
+popd && pushd roles/initial/files
+mkdir tools && ./get_tools.sh
 ```
 
-6. Copy tools/{cfssl, cfssljson, kubectl} to your /usr/local/bin, chmod +x
+6. Copy tools/{cfssl,cfssljson,kubectl} to your /usr/local/bin, chmod +x to it
 
 7. Generate certs and configs
 
@@ -35,9 +37,6 @@ cd certs
 ./00-gen-all-certs.sh
 cd ../configs
 ./00-gen-all-configs.sh
-cd ../../../etcd/files
-./00-get-etcd.sh
-
 popd
 ```
 
@@ -47,12 +46,12 @@ popd
 ansible-playbook -i inventories/office all.yml
 ```
 
-7. Handy game
+7. Play with it
 
 ```
 cd configs
 kubectl --kubeconfig admin.kubeconfig get componentstatuses
 kubectl --kubeconfig admin.kubeconfig apply -f rbac-role.yaml
 kubectl --kubeconfig admin.kubeconfig apply -f rbac-role-bind.yaml
-
+kubectl --kubeconfig admin.kubeconfig apply -f dashboard.yaml
 ```
