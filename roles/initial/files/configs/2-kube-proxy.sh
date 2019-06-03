@@ -1,10 +1,8 @@
 #!/bin/sh
-KUBERNETES_PUBLIC_ADDRESS=10.200.16.231
-
 kubectl config set-cluster such-kuber-very-wow \
    --certificate-authority=../certs/ca.pem \
    --embed-certs=true \
-   --server=https://${KUBERNETES_PUBLIC_ADDRESS}:6443 \
+   --server=https://94.130.141.147:6443 \
    --kubeconfig=kube-proxy.kubeconfig
 
 kubectl config set-credentials system:kube-proxy \
