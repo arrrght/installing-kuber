@@ -3,7 +3,7 @@
 kubectl config set-cluster such-kuber-very-wow \
   --certificate-authority=../certs/ca.pem \
   --embed-certs=true \
-  --server=https://10.200.16.231:6443 \
+  --server=https://10.200.15.231:6443 \
   --kubeconfig=admin.kubeconfig
 
 kubectl config set-credentials admin \

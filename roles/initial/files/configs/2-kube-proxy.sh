@@ -1,5 +1,5 @@
 #!/bin/sh
-KUBERNETES_PUBLIC_ADDRESS=10.200.16.231
+KUBERNETES_PUBLIC_ADDRESS=10.200.15.231
 
 kubectl config set-cluster such-kuber-very-wow \
    --certificate-authority=../certs/ca.pem \

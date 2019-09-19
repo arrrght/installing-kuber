@@ -1,3 +1,18 @@
+- name: Modprobe overlay
+  modprobe:
+    name: overlay
+    state: present
+
+- name: Modprobe br_netfilter
+  modprobe:
+    name: br_netfilter
+    state: present
+
+- name: Copy etc/hosts
+  template:
+    src: modules.j2
+    dest: /etc/modules
+
 - name: Copy etc/hosts
   template:
     src: hosts.j2
@@ -15,3 +30,27 @@
 - name: Workers tasks
   include_tasks: workers.yml
   when: "'workers' in group_names"
+
+- name: Sysctl net.bridge.bridge-nf-call-ip6tables
+  sysctl:
+    name: net.bridge.bridge-nf-call-ip6tables
+    value: 1
+    state: present
+    reload: yes
+    sysctl_set: yes
+
+- name: Sysctl net.ipv4.ip_forward
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    state: present
+    reload: yes
+    sysctl_set: yes
+
+- name: Sysctl net.bridge.bridge-nf-call-iptables
+  sysctl:
+    name: net.bridge.bridge-nf-call-iptables
+    value: 1
+    state: present
+    reload: yes
+    sysctl_set: yes

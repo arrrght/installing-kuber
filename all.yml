@@ -10,6 +10,8 @@
   hosts: controllers
   roles:
     - etcd
+  tags:
+    - etcd
 
 - name: Kuber-config
   become: true
